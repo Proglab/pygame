@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.x = x
         self.y = y
 
+    #déplacement
     def move(self, direction):
         self.vx = 0
         self.vy = 0
