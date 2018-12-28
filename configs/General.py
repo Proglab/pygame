@@ -18,6 +18,10 @@ GAME_FOLDER = os.path.join(os.path.dirname(__file__), "..")
 IMAGE_FOLDER = os.path.join(GAME_FOLDER, "img")
 TITLE = "My Game"
 
-TILESIZE = 32
+TILESIZE = 32 # taille des carré en pxl
 GRID_WIDTH = WIDTH / TILESIZE
 GRID_HEIGHT = HEIGHT / TILESIZE
+
+
+#player settings
+PLAYER_SPEED = 6

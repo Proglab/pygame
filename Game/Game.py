@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 from Actors.Player import *
+from Actors.Wall import *
 from configs.General import *
 
 
@@ -16,13 +17,16 @@ class Game:
 
     def new(self):
         self.all_sprites = pygame.sprite.Group()
-        self.player = Player()
+        self.walls = pygame.sprite.Group()
+        self.player = Player(self, 200, 200)
+        self.wall = Wall(self, 200, 200)
         self.all_sprites.add(self.player)
+        self.walls.add(self.wall)
 
     def run(self):
         self.playing = True
         while self.playing:
-            self.clock.tick(FPS)
+            self.dt = self.clock.tick(FPS) / 1000
             self.events()
             self.update()
             self.draw()
@@ -51,10 +55,8 @@ class Game:
         pygame.display.flip()
 
     def show_start_screen(self):
-
         pass
 
     def show_game_over_screen(self):
-
         pass
 
