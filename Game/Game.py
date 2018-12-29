@@ -19,9 +19,7 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
         self.player = Player(self, 200, 200)
-        self.wall = Wall(self, 200, 200)
         self.all_sprites.add(self.player)
-        self.walls.add(self.wall)
 
     def run(self):
         self.playing = True

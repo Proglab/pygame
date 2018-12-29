@@ -3,6 +3,7 @@ import os
 from configs import General
 from pygame.locals import *
 from configs.General import *
+vector = pygame.math.Vector2
 
 
 class Player(pygame.sprite.Sprite):
@@ -13,45 +14,38 @@ class Player(pygame.sprite.Sprite):
         self.rect.top = y
         self.rect.left = x
         self.game = game
-        self.vx = 0
-        self.vy = 0
-        self.x = x
-        self.y = y
+        self.velocity = vector(0, 0)
+        self.position = vector(x, y)
 
-    #déplacement
     def move(self, direction):
-        self.vx = 0
-        self.vy = 0
+        self.velocity = vector(0, 0)
 
         if direction == 'north':
-            self.vy = -PLAYER_SPEED
+            self.velocity.y = -PLAYER_SPEED
             if self.rect.top < 0:
-                self.vy = 0
+                self.velocity.y = 0
 
         if direction == 'south':
-            self.vy = PLAYER_SPEED
+            self.velocity.y = PLAYER_SPEED
             if self.rect.bottom > HEIGHT:
-                self.vy = 0
+                self.velocity.y = 0
 
         if direction == 'est':
-            self.vx = PLAYER_SPEED
+            self.velocity.x = PLAYER_SPEED
             if self.rect.right > WIDTH:
-                self.vx = 0
+                self.velocity.x = 0
 
         if direction == 'west':
-            self.vx = -PLAYER_SPEED
+            self.velocity.x = -PLAYER_SPEED
             if self.rect.left < 0:
-                self.vx = 0
+                self.velocity.x = 0
 
-        if self.vx != 0 and self.vy != 0:
-            self.vx *= 0.7071
-            self.vy *= 0.7071
+        if self.velocity.x != 0 and self.velocity.y != 0:   # patch vertical movement
+            self.velocity = vector(0.7071, 0.7071)
 
-        self.y += self.vy
-        self.x += self.vx
-        self.rect.y = self.y
-        self.rect.x = self.x
-
+        self.position += self.velocity
+        self.rect.y = self.position.y
+        self.rect.x = self.position.x
 
     def update(self):
         keystate = pygame.key.get_pressed()
@@ -63,3 +57,4 @@ class Player(pygame.sprite.Sprite):
             self.move('est')
         if keystate[K_DOWN] or keystate[K_s]:
             self.move('south')
+
