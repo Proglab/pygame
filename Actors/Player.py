@@ -55,9 +55,9 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         keystate = pygame.key.get_pressed()
-        if keystate[K_LEFT] or keystate[K_q]:
+        if keystate[K_LEFT] or keystate[K_a]:
             self.move('west')
-        if keystate[K_UP] or keystate[K_z]:
+        if keystate[K_UP] or keystate[K_w]:
             self.move('north')
         if keystate[K_RIGHT] or keystate[K_d]:
             self.move('est')
