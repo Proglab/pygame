@@ -9,7 +9,7 @@ vector = pygame.math.Vector2
 class Player(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(os.path.join(IMAGE_FOLDER, "player.gif")).convert_alpha()
+        self.image_ori = pygame.image.load(os.path.join(IMAGE_FOLDER, PLAYER_IMG)).convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.top = y
         self.rect.left = x

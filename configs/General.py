@@ -25,3 +25,4 @@ GRID_HEIGHT = HEIGHT / TILESIZE
 
 #player settings
 PLAYER_SPEED = 6
+PLAYER_IMG = 'player_basic.png'
