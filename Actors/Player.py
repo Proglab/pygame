@@ -90,9 +90,9 @@ class Player(pygame.sprite.Sprite):
             self.move('south-west')
         elif (keystate[K_DOWN] or keystate[K_s]) and (keystate[K_RIGHT] or keystate[K_d]):
             self.move('south-est')
-        elif (keystate[K_UP] or keystate[K_s]) and (keystate[K_RIGHT] or keystate[K_d]):
+        elif (keystate[K_UP] or keystate[K_z]) and (keystate[K_RIGHT] or keystate[K_d]):
             self.move('north-est')
-        elif (keystate[K_UP] or keystate[K_s]) and (keystate[K_LEFT] or keystate[K_a] or keystate[K_q]):
+        elif (keystate[K_UP] or keystate[K_z]) and (keystate[K_LEFT] or keystate[K_a] or keystate[K_q]):
             self.move('north-west')
         elif keystate[K_UP] or keystate[K_w] or keystate[K_z]:
             self.move('north')
