@@ -1,8 +1,10 @@
 import pygame
 from pygame.locals import *
 from Actors.Player import *
+from Actors.Map import *
 from Actors.Wall import *
 from configs.General import *
+from os import path
 
 
 class Game:
@@ -14,12 +16,25 @@ class Game:
         pygame.display.set_caption(TITLE)
         self.clock = pygame.time.Clock()
         self.running = True
+        self.load_data()
+
+    def load_data(self):
+        game_folder = path.join(path.dirname(__file__), '..')
+        map_folder = path.join(game_folder, 'map')
+        self.map = Map(path.join(map_folder, 'map.tmx'))
+        self.map_img = self.map.make_map()
+        self.map_rect = self.map_img.get_rect()
 
     def new(self):
         self.all_sprites = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
-        self.player = Player(self, 200, 200)
-        self.all_sprites.add(self.player)
+        for tile_object in self.map.tmx.objects:
+            if tile_object.name == 'player':
+                self.player = Player(self, tile_object.x, tile_object.y)
+                self.all_sprites.add(self.player)
+            if tile_object.name == 'wall':
+                wall = Wall(self, tile_object.x, tile_object.y, tile_object.width, tile_object.height)
+                self.walls.add(wall)
 
     def run(self):
         self.playing = True
@@ -47,8 +62,10 @@ class Game:
             pygame.draw.line(self.window, LIGHTGREY, (0, y), (WIDTH, y))
 
     def draw(self):
-        self.window.fill(DARKGREY)
-        self.draw_grid()
+        #self.window.fill(DARKGREY)
+        self.window.blit(self.map_img, (0, 0))
+
+        #self.draw_grid()
         self.all_sprites.draw(self.window)
         pygame.display.flip()
 
